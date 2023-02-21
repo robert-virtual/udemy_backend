@@ -1,2 +1,38 @@
-package com.example.udemy_backend.model;public class Course {
+package com.example.udemy_backend.model;
+
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Data
+public class Course {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String price;
+
+    private String description;
+
+    private String duration;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id",referencedColumnName = "id")
+    private Teacher teacher;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "students_courses",
+           joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+    )
+    private List<Student> students = new ArrayList<>();
+
+    public void addStudent(Student student){
+        this.students.add(student);
+    }
+    private LocalDateTime created_at = LocalDateTime.now();
 }

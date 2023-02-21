@@ -1,1 +1,10 @@
-
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;database=udemydb;trustServerCertificate=true
+    username: rober
+    password: superhardpass12
+  jpa:
+    show-sql: true
+    database: sql_server
+    hibernate:
+      ddl-auto: update

@@ -1,15 +1,19 @@
 package com.example.udemy_backend.service;
 
-import com.example.udemy_backend.model.Course;
-import com.example.udemy_backend.repository.CourseRepository;
+import com.example.udemy_backend.model.Teacher;
+import com.example.udemy_backend.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CourseService {
-    private final CourseRepository courseRepository;
-    public Iterable<Course> all(){
-        return courseRepository.findAll();
+public class TeacherService {
+    private final TeacherRepository teacherRepo;
+    public Iterable<Teacher> all(){
+        return teacherRepo.findAll();
+    }
+
+    public Teacher create(Teacher body) {
+        return teacherRepo.save(body);
     }
 }
