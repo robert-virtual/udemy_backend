@@ -18,11 +18,15 @@ public class Student {
 
     private LocalDateTime created_at = LocalDateTime.now();
 
-//    @ManyToMany(mappedBy = "students",fetch = FetchType.LAZY)
-//    private List<Course> courses = new ArrayList<>();
-//
-//    public void addCourse(Course course){
-//        courses.add(course);
-//    }
+    @ManyToMany
+    @JoinTable(
+            name = "students_courses",
+           joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+    )
+    private List<Course> courses = new ArrayList<>();
+    public void addCourse(Course course){
+        courses.add(course);
+    }
 
 }

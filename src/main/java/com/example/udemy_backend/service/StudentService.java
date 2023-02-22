@@ -1,6 +1,5 @@
 package com.example.udemy_backend.service;
 
-import com.example.udemy_backend.dto.CoursesDto;
 import com.example.udemy_backend.model.Course;
 import com.example.udemy_backend.model.Student;
 import com.example.udemy_backend.model.StudentCourse;
@@ -22,17 +21,17 @@ public class StudentService {
         return studentRepo.save(body);
     }
 
-    public Course addCourse(StudentCourse body) {
-         return courseRepo.findById(body.getCourse_id()).map(course -> {
-             course.setName(course.getName()+" (updated)");
-             Student student = studentRepo.findById(body.getStudent_id()).orElseThrow();
-             course.addStudent(student);
-             return courseRepo.save(course);
+    public Student addCourseToStudent(StudentCourse body) {
+         return studentRepo.findById(body.getStudent_id()).map(student -> {
+             Course course = courseRepo.findById(body.getCourse_id()).orElseThrow();
+             student.addCourse(course);
+             return studentRepo.save(student);
          }).orElseThrow();
 
     }
 
-    public Iterable<CoursesDto> getCourses(long student_id) {
-        return courseRepo.getCourses(student_id);
+    public Iterable<Course> getStudentCourses(long student_id) {
+//         return studentRepo.findById(student_id).orElseThrow().getCourses();
+        return studentRepo.findById(student_id).orElseThrow().getCourses();
     }
 }

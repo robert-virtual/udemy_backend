@@ -1,6 +1,5 @@
 package com.example.udemy_backend.controllers;
 
-import com.example.udemy_backend.dto.CoursesDto;
 import com.example.udemy_backend.model.Course;
 import com.example.udemy_backend.model.Student;
 import com.example.udemy_backend.model.StudentCourse;
@@ -23,11 +22,11 @@ public class StudentController {
         return studentService.create(body);
     }
     @GetMapping("/{student_id}/course")
-    public Iterable<CoursesDto> getCourse(@PathVariable long student_id){
-        return studentService.getCourses(student_id);
+    public Iterable<Course> getCourse(@PathVariable long student_id){
+        return studentService.getStudentCourses(student_id);
     }
     @PostMapping("/course")
-    public Course addCourse(@RequestBody StudentCourse body){
-         return studentService.addCourse(body);
+    public Student addCourse(@RequestBody StudentCourse body){
+         return studentService.addCourseToStudent(body);
     }
 }

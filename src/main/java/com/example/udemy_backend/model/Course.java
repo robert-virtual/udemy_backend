@@ -19,20 +19,20 @@ public class Course {
     private String description;
 
     private String duration;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "teacher_id",referencedColumnName = "id")
     private Teacher teacher;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "students_courses",
-           joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
-    )
-    private List<Student> students = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "students_courses",
+//           joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+//    )
+//    private List<Student> students = new ArrayList<>();
 
-    public void addStudent(Student student){
-        this.students.add(student);
-    }
+//    public void addStudent(Student student){
+//        this.students.add(student);
+//    }
     private LocalDateTime created_at = LocalDateTime.now();
 }
