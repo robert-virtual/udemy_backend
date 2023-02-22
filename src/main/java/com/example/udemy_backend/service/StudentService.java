@@ -31,7 +31,6 @@ public class StudentService {
     }
 
     public Iterable<Course> getStudentCourses(long student_id) {
-//         return studentRepo.findById(student_id).orElseThrow().getCourses();
         return studentRepo.findById(student_id).orElseThrow().getCourses();
     }
 }
